@@ -228,7 +228,7 @@ The API will respond with different error messages that will be explained below:
 
 ## FAQs
 
-**How to pick the right value from a JSON forecast file?**
+### How to pick the right value from a JSON forecast file?
 
 All weather data in the JSON file is structured in various sections (“objects”) based on temporal resolution, e.g.:
 
@@ -253,20 +253,20 @@ For parameters like precipitation, the time always refers to the past period. So
 
 Now have a look at “PrecipitationRain_3hourlySum” which e.g. shows: 0, 5, 18. Since you need the 3rd value, you will retrieve “18” as the correct amount. Use the “PrecipitationRain_3hourlySum_Unit” element to find out the parameter unit: mm/3h.
 
-**Can you tell me more about the usage of time parameters, local time and daylight savings time?**
+### Can you tell me more about the usage of time parameters, local time and daylight savings time?
 
 All time/date specifications are based on the international ISO 8601 norm to avoid misinterpretations and improve automatic data processing. They are displayed in local time of the coordinate in question (Format: YYYY-MM-DDTHH:MM+time difference to UTC). Daylight savings time is incorporated.
 (So just to make 100% sure: “SunSet: ["2018-02-12T18:50+05:00"]” would mean that on February 12th the sun sets at 6.50 pm local time at the coordinate in question. You do NOT need to do any calculations. The “+05:00” just shows the time difference compared to UTC, but this is just for your information as it is already incorporated)
 
 
-**What about the integration of weather icons? Do you provide any?**
+### What about the integration of weather icons? Do you provide any?
 
 To help you display weather icons on your website or in your app, we include the parameter “Icon” that contains a descriptive file name (26 possible values, e.g.“sunny.png”). This value summarizes as far as possible cloud cover, precipitation quantity (snow/rain) and thunderstorm probability for the period in question and enables you to integrate your individual weather icons.
 For our API customers we provide basic icon sets in different styles for free (.ai and .png-format). Please get in touch with us and we'll happily send them to you. These sets may only be used within your purchased application and may not be redistributed.
 If you've already got an icon set which you want to use, this overview might help you to assign them correctly to the corresponding values of the "Icon" parameter:
 ![](img/all_weather_icons.png)
 
-**Do you provide a tool to check my number of API calls?**
+### Do you provide a tool to check my number of API calls?
 
 The MetGIS API Monitoring Tool (AMT) allows you at any time to get a review of the API calls processed with your API Key(s). You can check the number of API calls you have made in the past, up to the present date. This includes daily or monthly time resolutions and simple diagrams. 
 

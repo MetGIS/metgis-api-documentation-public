@@ -1,4 +1,4 @@
-# User Manuals to MetGIS weather APIs
+# User Manuals to MetGIS Weather APIs
 
 The documents in this git repository describe the usage of various MetGIS weather application programming interfaces that can be used to obtain different weather data.
 The following APIs are documented:
