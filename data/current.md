@@ -1,0 +1,29 @@
+```json
+{
+    "Info": {
+        "Description": "MetGIS Point API, Package \"current\" v 1.0; all data correspond to local time",
+        "Forecast_Calculated_LocalTime": "2021-04-06T15:23+02:00",
+        "Forecast_Calculated_UTC": "2021-04-06T13:23+00:00",
+        "Latitude": 47.475,
+        "Longitude": 13.606,
+        "Altitude_[m]": 2690
+    },
+    "Current": {
+        "Temperature": -17.3,
+        "PrecipitationTotal_Intensity": 0.5,
+        "PrecipitationTotal_Intensity_Unit": "mm/h",
+        "PrecipitationSnow_Intensity_Unit": "cm/h",
+        "PrecipitationRain_Intensity_Unit": "mm/h",
+        "WindSpeed": 44,
+        "Temperature_Unit": "°C",
+        "SunSet": "2021-04-06T19:43+02:00",
+        "SunRise": "2021-04-06T06:35+02:00",
+        "PrecipitationSnow_Intensity": 0.9,
+        "WindSpeed_Unit": "km/h",
+        "Icon": "cloud_bright_snow_drizzle.png",
+        "WindDirection": "NW",
+        "PrecipitationRain_Intensity": 0,
+        "WindStrength": "high"
+    }
+}
+```
