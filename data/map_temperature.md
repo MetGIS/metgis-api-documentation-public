@@ -1,7 +1,5 @@
 # Temperature Map (tmp2m)
 
-This map visualizes the temperature _(2 meters above ground)_ forecast. Show example of temperature map. **TODO**
-
 Multiple forecast time steps are available (e.g. forecast for 3 hours, 6 hours, 9 hours, ..) and there is one independent map per time step.
 
 The data is provided as raster tiles.
