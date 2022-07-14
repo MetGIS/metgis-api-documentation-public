@@ -375,6 +375,10 @@ Minimum air temperature within a forecast interval. The forecast interval length
 
 Unit of [TemperatureMinimum](#TemperatureMinimum).
 
+## TextForecast
+
+Verbal description of the weather for one day, includes minimum and maximum temperatures.
+
 ## ThunderstormProbability
 
 General description of thunderstorm risk for the interval leading up to the corresponding forecast time at the point of interest. Possible values are `low`, `moderate`, `high` and `extreme`. Go [here](forecast3hourly_example_1.md) for an explicit example of forecast times and parameters for intervals.
@@ -390,6 +394,10 @@ Forecast of the total cloud cover at the point of interest.
 ## TotalCloudCover_Unit
 
 Unit of [TotalCloudCover](#totalcloudcover)
+
+## TotalCloudCoverMean
+
+Mean Value of total cloud cover over associated time span.
 
 ## UpperCloudLimit
 
@@ -422,6 +430,10 @@ This Variable contains the values that [WindDirection](#winddirection) can possi
 ## WindSpeed
 
 Ten-minute average of wind speed 10 meters above ground. Attention: gusts may reach more than twice that speed.
+
+## WindSpeedMaximum
+
+Maximum value of 10 minute averaged wind speed over the respective period.
 
 ## WindSpeed_Unit
 
