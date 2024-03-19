@@ -1,0 +1,128 @@
+{
+    "Info": {
+        "Forecast_Calculated_LocalTime": "2023-12-13T13:00+02:00",
+        "Forecast_Calculated_UTC": "2023-12-13T11:00+00:00",
+        "Description": "",
+        "Altitude_[m]": 0.0,
+        "Latitude": 48.647861,
+        "Longitude": -16.019249
+    },
+    "Forecast_monthly": {
+        "ForecastDates_UTC": [
+            "2024-03-01",
+            "2024-04-01",
+            "2024-05-01",
+            "2024-06-01",
+            "2024-07-01",
+            "2024-08-01"
+        ],
+        "PrecipitationRateAnomaly": [
+            0.1,
+            -0.0,
+            0.0,
+            0.1,
+            -0.2,
+            -0.0
+        ],
+        "Temperature95thPercentile": [
+            12.0,
+            13.1,
+            15.2,
+            18.2,
+            20.5,
+            20.8
+        ],
+        "TemperatureMeanAnomaly": [
+            0.3,
+            0.6,
+            0.6,
+            0.7,
+            0.9,
+            0.7
+        ],
+        "PrecipitationRate25thPercentile": [
+            2.7,
+            2.3,
+            1.9,
+            2.0,
+            1.8,
+            1.7
+        ],
+        "PrecipitationRate95thPercentile": [
+            6.9,
+            5.2,
+            5.3,
+            4.1,
+            4.1,
+            4.8
+        ],
+        "TemperatureMean": [
+            11.1,
+            12.0,
+            14.1,
+            17.1,
+            19.5,
+            19.6
+        ],
+        "Temperature5thPercentile": [
+            10.0,
+            10.9,
+            12.8,
+            15.8,
+            18.3,
+            18.5
+        ],
+        "Temperature25thPercentile": [
+            10.7,
+            11.4,
+            13.6,
+            16.4,
+            19.1,
+            18.8
+        ],
+        "Temperature75thPercentile": [
+            11.5,
+            12.4,
+            14.7,
+            17.8,
+            20.0,
+            20.1
+        ],
+        "PrecipitationRateMean": [
+            3.8,
+            3.4,
+            2.7,
+            2.8,
+            2.5,
+            2.8
+        ],
+        "PrecipitationRate5thPercentile": [
+            1.8,
+            1.3,
+            0.9,
+            1.4,
+            1.0,
+            1.1
+        ],
+        "PrecipitationRate75thPercentile": [
+            4.7,
+            4.0,
+            3.3,
+            3.4,
+            3.1,
+            3.8
+        ],
+        "PrecipitationRateAnomaly_Unit": "mm/d",
+        "TemperatureMean_Unit": "°C",
+        "PrecipitationRate95thPercentile_Unit": "mm/d",
+        "Temperature95thPercentile_Unit": "°C",
+        "PrecipitationRateMean_Unit": "mm/d",
+        "PrecipitationRate75thPercentile_Unit": "mm/d",
+        "Temperature5thPercentile_Unit": "°C",
+        "PrecipitationRate5thPercentile_Unit": "mm/d",
+        "TemperatureMeanAnomaly_Unit": "°C",
+        "PrecipitationRate25thPercentile_Unit": "mm/d",
+        "Temperature25thPercentile_Unit": "°C",
+        "Temperature75thPercentile_Unit": "°C"
+    }
+}

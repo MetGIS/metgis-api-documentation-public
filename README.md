@@ -14,3 +14,13 @@ This API can be used to fetch weather forecasts and information about the curren
 ## MetGIS HIST API
 
 [Documentation](metgis_hist_API_reference.md)
+
+## MetGIS long range API
+
+[Documentation](metgis_long_range_point_API_reference.md)
+
+## MetGIS Weather Warnings
+
+[Documentation](metgis_weather_warnings_API_reference.md)
+
+
