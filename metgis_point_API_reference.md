@@ -205,7 +205,7 @@ This package includes weather forecast data for a single point in time, and can 
 ```
 https://api.metgis.com/forecast?key={your-key}&lat={latitude}&lon={longitude}&alt={altitude}&v=fctisl&fctime={yyyymmddHHMM}
 ```
-The format of this parameter is `yyyymmddHHMM`, e. g. `202204172230` for the 17th of April 2022 at half past ten in the evening (UTC time!). Please note that weather data can only be requested in within the range of the next ten days.
+The format of this parameter is `yyyymmddHHMM`, e. g. `202204172230` for the 17th of April 2022 at half past ten in the evening (UTC time!). Please note that weather data can only be requested within the range of the next ten days.
 
 This table gives an overview of the information included in this package:
 
@@ -217,6 +217,16 @@ This table gives an overview of the information included in this package:
 | forecasts | [date](data/variable_list_point_api.md#date), [Temperature](data/variable_list_point_api.md#temperature), [PrecipitationTotal_Intensity](data/variable_list_point_api.md#precipitationtotal_intensity), [PrecipitationSnow_Intensity](data/variable_list_point_api.md#precipitationsnow_intensity), [WeatherDescription](data/variable_list_point_api.md#weatherdescription), [alt](data/variable_list_point_api.md#altitude), [lon](data/variable_list_point_api.md#longitude), [WindSpeed](data/variable_list_point_api.md#windspeed), [Icon](data/variable_list_point_api.md#icon), [WindDirection](data/variable_list_point_api.md#winddirection), [lat](data/variable_list_point_api.md#latitude) |
 
 What a response JSON looks like is shown in this [example](data/fctisl.json). The forecasts structure contains the weather data for the requested time and date at the specified location. Also included in the JSON file are fields that describe the units used for the forecast data.
+
+For more convenience it is possible to request up to 100 different points with one API call. Therefore an array of latitudes, longitudes and timestamps must be included in the request. It is also possible to add altitude values, but this is optional. If no altitudes are provided, the altitude values will be estimated from the DEM that is used within MetGIS, at the moment ASTER data with a horizontal resolution of 30m. 
+The separator for using multiple points in the request is the vertical bar, or pipe symbol (|), and a valid request may look like this:
+```
+https://api002.metgis.com/forecast?key={your-key}&lat=46.123|36.562&lon=13.567|12.114&v=fctisl&fctime=202407032330|202407032230
+```
+Please note that the same number of latitudes, longitudes, timestamps and optionally altitudes must be present in the request!
+
+If this multiple-point https request is used, our API monitoring tool (AMT) will count each point as individual API call.
+
 
 ## Common Errors
 
