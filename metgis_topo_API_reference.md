@@ -6,9 +6,9 @@ The MetGis Topo-API offers tiled-topographic data as pngs.
  	
 
 
-| Tileset  	|  datapath 	|   	|   	|   	|
-|---	|---	|---	|---	|---	|
-| background  	| /background  	|   	|   	|   	|
-|  overlay 	|   	|  /overlay  	|   	|   	|
-|  dem 	|   	|  /dem 	|   	|   	|
-|  worlddem 	|   	|  /worlddem 	|   	|   	|
+| Tileset  	|  datapath 	
+|---	|---	
+| background  	| /background  
+|  overlay 	|   	  /overlay  	
+|  dem 	|   	  /dem 
+|  worlddem 	|   	 /worlddem 
