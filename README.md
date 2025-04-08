@@ -5,7 +5,7 @@ The following APIs are documented:
 
 ## MetGIS Point API
 
-Ultra-precise location-based global weather API. See the [documatentation](metgis_point_API_reference.md).
+Ultra-precise location-based global weather API. See the [documentation](metgis_point_API_reference.md).
 
 ## MetGIS Maps API
 
