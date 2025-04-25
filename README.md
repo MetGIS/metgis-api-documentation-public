@@ -15,7 +15,7 @@ High-resolution weather forecast and snow cover layers for easy integration. See
 
 Weather data from the past in hourly resolution, perfectly suitable for AI training. See the [documentation](metgis_hist_API_reference.md). 
 
-## MetGIS long range API
+## MetGIS Long Range API
 
 Weather trends and probabilities for the next 7 months. See the [documentation](metgis_long_range_point_API_reference.md). 
 
