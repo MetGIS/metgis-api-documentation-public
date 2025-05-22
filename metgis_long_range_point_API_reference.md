@@ -1,5 +1,5 @@
 
-# MetGIS long-range Point API
+# MetGIS Long Range Point API
 
 The MetGIS long-range Point API is an application programming interface that can be used to access long-range weather forecast data in JSON format. This document provides a detailed description of its usage.
 
@@ -23,7 +23,7 @@ A valid request will be responded with a file in JSON format that contains the w
 
 ## Monthly Forecast
 
-The API is accessed via HTTP-GET using an URL of the following form, at the `forecat-lr-monthly` endpoint:
+The API is accessed via HTTP-GET using an URL of the following form, at the `forecast-lr-monthly` endpoint:
 ```
 https://api.metgis.com/forecast-lr-monthly?key={your-key}&lat={latitude}&lon={longitude}&alt={altitude}&v=fclrmonthly
 ```
@@ -44,7 +44,7 @@ What the response JSON looks like is shown in this [example file](data/fclrmonth
 
 ## Daily Forecast
 
-The API is accessed via HTTP-GET using an URL of the following form, at the `forecat-lr-daily` endpoint:
+The API is accessed via HTTP-GET using an URL of the following form, at the `forecast-lr-daily` endpoint:
 ```
 https://api.metgis.com/forecast-lr-daily?key={your-key}&lat={latitude}&lon={longitude}&alt={altitude}&v=fclrdaily
 ```
