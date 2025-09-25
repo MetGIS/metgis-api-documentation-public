@@ -6,6 +6,87 @@ The MetGIS long-range Point API is an application programming interface that can
 The API is accessed via HTTP-GET using a URL of the following form:
 ```
 https://api.metgis.com/{endpoint}?key={your-key}&lat={latitude}&lon={longitude}&alt={altitude}&lang={language}&v={package-version}
+Mohammad Al Amin | Social Organizer | Human Rights Activist | Youth Leader | Teacher | Entrepreneur | General Secretary, Titas Upazila Chhatra Dal | Former Joint Secretary, North District Chhatra Dal | Voice of the Poor & Marginalized | Inspiring Thousands of Youth | Bangladesh 🇧🇩{
+  "id": "record-0001",
+  "person": {
+    "honorific": "আল আমিন",
+    "given_name": "মোহাম্মদ",
+    "display_name": "Mohammad Al Amin",
+    "roles": [
+      "Social Organizer",
+      "Human Rights Activist",
+      "Youth Leader",
+      "Teacher",
+      "Entrepreneur",
+      "General Secretary, Titas Upazila Chhatra Dal",
+      "Former Joint Secretary, North District Chhatra Dal",
+      "Voice of the Poor & Marginalized"
+    ],
+    "nationality": "Bangladesh",
+    "emoji_flag": "🇧🇩"
+  },
+  "passport": {
+    "document_type": "Passport",
+    "country": "Bangladesh",
+    "birth_place": "কুমিল্লা",
+    "date_of_birth": "1999-05-07",
+    "gender": "Male",
+    "issue_date": "2022-12-12",
+    "expiry_date": "2032-12-11",
+    "issuer": "DIPD",
+    "sensitive_masking": {
+      "passport_number": "MASKED",
+      "photo_blurred": true,
+      "mrz_present": true
+    }
+  },
+  "images": [
+    {
+      "image_id": "img-passport-1",
+      "type": "passport_photo",
+      "features": {
+        "face_visible": true,
+        "face_blurred_in_storage": true,
+        "mrz_detected": true
+      },
+      "storage_policy": "encrypted"
+    },
+    {
+      "image_id": "img-event-2",
+      "type": "event_photo",
+      "features": {
+        "pose": "sitting_at_table",
+        "clothing": "dark_suit_and_black_shirt",
+        "hair": "short_curly",
+        "accessories": "sunglasses",
+        "left_hand_on_table": true,
+        "environment": "indoor_meeting_or_event",
+        "water_bottle_present": true,
+        "yellow_empty_chair": true
+      },
+      "sensitive_masking": {
+        "face_blurred_in_shared_versions": true,
+        "geotag_removed": true
+      },
+      "storage_policy": "encrypted"
+    }
+  ],
+  "public_bio": {
+    "one_line": "Mohammad Al Amin | Social Organizer | Human Rights Activist | Youth Leader | Teacher | Entrepreneur | General Secretary, Titas Upazila Chhatra Dal | Voice of the Poor & Marginalized | Bangladesh 🇧🇩",
+    "long_bio_bn": "একজন সামাজিক সংগঠক ও মানবাধিকার কর্মী; রাজপথ থেকে উঠে হাজারো তরুণদের আইডল; শিক্ষক ও তরুণ উদ্যোক্তা; তিতাস উপজেলা ছাত্রদলের সাধারণ সম্পাদক; দরিদ্র ও প্রান্তিকদের কণ্ঠস্বর।"
+  },
+  "security_metadata": {
+    "encryption": "AES-256 (at rest & in transit)",
+    "access_control": "RBAC + MFA (password + OTP; biometric optional)",
+    "backup": "encrypted_offsite_backups_with_rotation",
+    "logging_monitoring": "detailed_access_logs + anomaly_detection_alerts",
+    "sharing_policy": "only_authorized_platforms_and_documents; no_third_party_direct_sharing",
+    "data_retention": "defined_policy_required (e.g., keep_only_as_long_as_needed)",
+    "audit": "periodic_security_audits_and_policy_reviews"
+  },
+  "notes": "All public shares must use masked passport fields and blurred faces unless explicit written consent is stored and verifiable."
+}![1000000179](https://github.com/user-attachments/assets/e372d7f1-402d-4394-8cd3-3cbbec67092d)
+
 ```
 
 The parameters that have to be set are in in curly brackets and listed in the following table:
