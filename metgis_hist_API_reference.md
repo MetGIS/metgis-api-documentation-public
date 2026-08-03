@@ -55,6 +55,9 @@ The MetGIS Hist API provides access to the following weather parameters:
 | hidswr          |                                                                                                                 Historical global radiation data available in hourly resolution.                                                                                                                 |
 | hidsum          | Summary of the meteorological conditions for the day of the given timestamp. This package includes daily minimum, maximum and mean values of the parameters temperature, cloud cover, relative humidity and wind as well as the daily sum of the parameters precipitation and sunshine duration. |
 | hidsmall        |                                            Summary of the meteorological conditions for the day of the given timestamp. This package includes daily minimum, maximum and mean values of the parameter temperature and the daily sum of precipitation.                                            |
+| hiclimmonth     |                          Average and extreme parameters that describe the usually occurring meteorological conditions at a certain point in the month containing the requested day. Check [this section](#package-hiclimmonth) for further description of this data format. |
+| hiclimmonth     |                          Average and extreme parameters that describe the usually occurring meteorological conditions at a certain point on the requested day. Check [this section](#package-hiclimday) for further description of this data format. |
+
 
 A correct API request to retrieve the data package `hidsum` for the first to the third of April 2017 for specific coordinates would look like this:
 
@@ -213,6 +216,54 @@ This request would yield the following JSON file:
 Please note that in the hourly-resolution data packages hihrp and hihrsn, the numbers given for precipitation and fresh snow refer to one-hour time intervals ending at the given timestamp (reference time).
 
 <!--- TODO: add package sunshine duration if operational -->
+
+### Package hiclimmonth
+
+This package describes the meteorological conditions at the requested month in the month of the day that was in the request URL. The day and time of the request are therefore not considered, but still have to be in the request to keep the date format, and it is not possible to request more than one point in a single request.
+The average and extreme values are derived by considering all available data for the given point in the respective month, e. g. if the requested point is in July, the requested parameters will be calculated with July values from every year that is present in the MetGIS histapi database. 
+The variables included in this package are shown in the following table:
+
+| Variable | Description |
+| ------- | :--------: |
+| tmp_mean | Mean temperature (in °C) | 
+| tmp_mean_min | Mean minimum temperature of this month (in °C) | 
+| tmp_mean_max | Mean maximum temperature of this month (in °C) | 
+| tmp_abs_max | Highest temperature of this month (in °C) | 
+| tmp_abs_min | Lowest temperature of this month (in °C) | 
+| num_rain_days_02 | Mean number of days with any precipitation > 0.2 mm | 
+| num_snow_days_02 | Mean number of days with any snowfall > 0.2 cm | 
+| num_rain_days_1 | Mean number of days with moderate precipitation > 1 mm | 
+| num_snow_days_1 | Mean number of days with moderate snowfall > 1 cm | 
+| num_rain_days_5 | Mean number of days with heavy precipitation > 5 mm | 
+| num_snow_days_5 | Mean number of days with heavy snowfall > 5 cm | 
+| num_sunny_days | Mean number of sunny days (average cloudiness < 20%) | 
+| rel_humidity_mean | Mean relative humidity of this month (in %) | 
+| sunshine_duration_mean | Mean amount of daily sunshine duration (in h) | 
+| precipitation_mean | Mean monthly sum of precipitation (in mm) | 
+| fresh_snow_mean | Mean monthly sum of fresh snow (in cm) |
+
+### Package hiclimday
+
+This package describes the meteorological conditions at a certain point that usually occur on this day of the year. To calculate the average and extreme values that are included in the package all available data for this point for a period of 7 days, centred at the requested day of the year, is considered. This means that the average is calculated from as many years as are available in the MetGIS histapi database. The time specified in the request is not considered, but it stll has to be included in the URL to be conform to the request date format.
+The following variables are included in this package:
+| Variable | Description |
+| ------- | :--------: |
+| tmp_mean | Mean temperature (in °C) | 
+| tmp_mean_min | Mean minimum temperature (in °C) | 
+| tmp_mean_max | Mean maximum temperature (in °C) | 
+| tmp_abs_max | Highest temperature of this day (in °C) | 
+| tmp_abs_min | Lowest temperature of this day (in °C) | 
+| prob_rain_day_02 | Probability of any precipitation > 0.2 mm (in %) | 
+| prob_snow_day_02 | Probability of any snowfall > 0.2 cm (in %) | 
+| prob_rain_day_1 | Probability of moderate precipitation > 1 mm (in %) | 
+| prob_snow_day_1 | Probability of moderate snowfall > 1 cm (in %) | 
+| prob_rain_day_5 | Probability of heavy precipitation > 5 mm (in %) | 
+| prob_snow_day_5 | Probability of heavy snowfall > 5 cm (in %) | 
+| prob_sunny_day | Probability of sunny day with average cloudiness < 20% (in %) | 
+| rel_humidity_mean | Mean relative humidity of this day (in %) | 
+| sunshine_duration_mean | Mean amount of daily sunshine duration (in h) | 
+| precipitation_mean | Mean precipitation of this day (in mm) | 
+| fresh_snow_mean | Mean sum of fresh snow of this day (in cm) | 
 
 ## Common Errors
 

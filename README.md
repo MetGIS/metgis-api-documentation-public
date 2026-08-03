@@ -4,8 +4,8 @@ The documents in this git repository describe how to use the various MetGIS APIs
 The following APIs are documented:
 
 ## MetGIS Point API
-
-Ultra-precise location-based global weather API. See the [documentation](metgis_point_API_reference.md).
+This API can be used to fetch weather forecasts and information about the current weather in JSON format.
+See the [documentation](metgis_point_API_reference.md).
 
 ## MetGIS Maps API
 
@@ -16,8 +16,8 @@ High-resolution weather forecast and snow cover layers for easy integration. See
 Weather data from the past in hourly resolution, perfectly suitable for AI training. See the [documentation](metgis_hist_API_reference.md). 
 
 ## MetGIS Long Range API
-
-Weather trends and probabilities for the next 7 months. See the [documentation](metgis_long_range_point_API_reference.md). 
+This API can be used to fetch long-range weather forecasts for the next months.
+See the [documentation](metgis_long_range_point_API_reference.md). 
 
 ## MetGIS Weather Warnings
 
