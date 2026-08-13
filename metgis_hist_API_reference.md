@@ -1,6 +1,6 @@
-# MetGIS HIST API
+# MetGIS Regional HIST API
 
-The MetGIS HIST API is an application programming interface that can be used to access historical weather data in JSON format. It follows REST API constraints. This document provides a detailed description of it's usage. Information about obtaining access rights to it can be found [here](https://weatherapi.metgis.com/histapi), or [contact us](https://contact.metgis.com/de/).
+The MetGIS Regional HIST API is an application programming interface that can be used to access historical weather data in JSON format. It follows REST API constraints. This document provides a detailed description of it's usage. Information about obtaining access rights to it can be found [here](https://weatherapi.metgis.com/histapi), or [contact us](https://contact.metgis.com/de/).
 
 The historical data is reconstructed on the basis of global model analyzes (includes data from weather stations, ground radar, satellites, weather balloons, weather buoys, measured values from aircraft, etc.), regional weather simulation models and the MetGIS downscaling algorithm, applied on a 1 km grid. This data is enriched with a network of additional, certified stations for even more reliable results.
 
@@ -12,6 +12,12 @@ The API can be accessed via http using an URL of the following form:
 https://api.hist.metgis.com/histapiserverRest/histdata?lon={longitude}&lat={latitude}&time={timestamp}&v={package-version}&key={your-key}
 ```
 
+The geographic location for which the data is requested for can also be transmitted by specifying a postcode and country in the request, omitting the parameters lat, lon and alt:
+```
+https://api.hist.metgis.com/histapiserverRest/histdata?&time={timestamp}&v={package-version}&zip={postcode}&country={country}&v={package-version}
+```
+**Important**: Forecasts for postcodes can only be requested for points in Switzerland, Austria and Germany!
+
 The parameters that have to be set are in curly brackets and listed in the following table:
 
 | Parameter |                             Description                             | Comments                                                                                                                                                                                                                                                                                                   |
@@ -20,7 +26,7 @@ The parameters that have to be set are in curly brackets and listed in the follo
 | lat       | Latitude of point the weather data is requested for in degrees [°]  | Latitude of points south of the equator is negative, use point (.) as decimal separator, ranges can be given with an underscore (e. g. `47.16_48.25` for all values between 47.15° and 48.25° north). Mandatory parameter.                                                                                 |
 | lon       | Longitude of point the weather data is requested for in degrees [°] | Longitude west of 0° meridian can be given as negative values or in the range from 180° to 360°, use point (.) as decimal separator, ranges can be given with an underscore (e. g. `12.14_13.45` for all values between 12.14° and 13.45° east). Mandatory parameter.                                      |
 | v         |               Name of requested weather data package                | Key must have access rights to requested package. For available package versions check the table in section [package versions](#package-versions). Mandatory parameter.                                                                                                                                    |
-| time      |    The timestamp for which the meteorological data is requested     | The timestamp is given in the format `yyyymmddHHMM`, e. g. `201603021100` for data for the 2nd of March 2016 at 11 o'clock (UTC). Time ranges can be given with underscores (`starttimestamp_endtimestamp`), to retrieve all data between two points in time. All times refer to UTC. Mandatory parameter. |
+| time      |    The timestamp for which the meteorological data is requested     | The timestamp is given in the format `yyyymmddHHMM`, e. g. `201603021100` for data for the 2nd of March 2016 at 11 o'clock (UTC). Time ranges can be given with underscores (`starttimestamp_endtimestamp`), to retrieve all data between two points in time. All times refer to UTC. For all packages that provide data for single points in time, the request must contain at least one timestamp. For packages that yield values for a period of time, specification of a time range is mandatory. |
 
 A valid request will be responded with a file in JSON format that contains the specified historical weather data. The files are mostly self explaining, but a detailed description of the available packages is given in the section ["Package versions"](#package-versions).
 
@@ -55,8 +61,12 @@ The MetGIS Hist API provides access to the following weather parameters:
 | hidswr          |                                                                                                                 Historical global radiation data available in hourly resolution.                                                                                                                 |
 | hidsum          | Summary of the meteorological conditions for the day of the given timestamp. This package includes daily minimum, maximum and mean values of the parameters temperature, cloud cover, relative humidity and wind as well as the daily sum of the parameters precipitation and sunshine duration. |
 | hidsmall        |                                            Summary of the meteorological conditions for the day of the given timestamp. This package includes daily minimum, maximum and mean values of the parameter temperature and the daily sum of precipitation.                                            |
-| hiclimmonth     |                          Average and extreme parameters that describe the usually occurring meteorological conditions at a certain point in the month containing the requested day. Check [this section](#package-hiclimmonth) for further description of this data format. |
-| hiclimmonth     |                          Average and extreme parameters that describe the usually occurring meteorological conditions at a certain point on the requested day. Check [this section](#package-hiclimday) for further description of this data format. |
+| hiclimmonth     |                          Average and extreme parameters that describe the usually occurring meteorological conditions in a certain calender month. Check [this section](#package-hiclimmonth) for further description of this data format. |
+| hiclimday     |                          Average and extreme parameters that describe the usually occurring meteorological conditions at a certain day of the year. Check [this section](#package-hiclimday) for further description of this data format. |
+| hidegreeday     |   Heating degree day number for the requested date. Check [this section](#package-hidegreeday) for further description of the enclosed data|
+| higdegreeday10 | Growing degree day unit for a period defined by the request. Check [this section](#package-higdegreeday10) for further description of this data format |
+| hirhext         | Extended relative humidity package that provides water vapour pressure and dew point along with relative humidity |
+| higlobradsum | This package provides the global radiation sum in MJ/m² for the period selected in the request |
 
 
 A correct API request to retrieve the data package `hidsum` for the first to the third of April 2017 for specific coordinates would look like this:
@@ -264,6 +274,53 @@ The following variables are included in this package:
 | sunshine_duration_mean | Mean amount of daily sunshine duration (in h) | 
 | precipitation_mean | Mean precipitation of this day (in mm) | 
 | fresh_snow_mean | Mean sum of fresh snow of this day (in cm) | 
+
+
+
+### Package hidegreeday
+
+
+This package provides degree day numbers calculated for each requested day following the conventions of ÖNORM B 8135. The base temperature for the value is 20°C, with a threshold temperature of 15°C. It is calculated for each day using the formula:
+$$G_{t20/15} = (t_i - t_a)$$
+where $t_i$ is the base temperature (20°C) and $t_a$ is the average temperature of the day, which is also included in the requested dataset.
+
+### Package higdegreeday10
+
+This package provides growing degree units for an arbitrary choosable period. The growing degree unit is the sum of each day's growing degrees in the requested period. The growing degrees are calculated using the following formula:
+
+$$GDD = \max\left\lbrace \frac{T_{max} + T_{min}}{2} - T_{base},\ 0 \right\rbrace$$
+
+In this formula $T_{max}$ and $T_{min}$ are the maximum and minimum temperature of the day and 10°C is the value for $T_{base}$.
+
+A request of growing degree units for the month of July 2024 would look like this:
+
+```
+https://api.hist.metgis.com/histapiserverRest/histdata?time=202407010000_202407312300&v=higdegreeday10&key={your-key}&zip=01945&country=de
+```
+And yield the answer:
+```
+{
+
+      "Info": "Historical Growing Degree Day Data",
+      "data": [
+            {
+                  "lon": 14,
+                  "lat": 51.4,
+                  "alt": 133,
+                  "date_start": "2024070100",
+                  "date_end": "2024073123",
+                  "gdegday": 301
+            }
+      ],
+      "Info_alt": "altitude of the data point (in m above mean sea level)",
+      "Info_degree_day_number": "growing-degree-day number of the period (in °C)"
+
+}
+```
+The summarized Growing degrees (growing degree units) are presented as growing degree number.
+
+
+
 
 ## Common Errors
 

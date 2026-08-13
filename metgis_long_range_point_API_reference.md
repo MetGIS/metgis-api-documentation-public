@@ -56,7 +56,7 @@ The following forecast fields are available:
 | Item | Included Parameters | Forecast Range | Time Resolution |
 | --- | ------ | :-----:|:-----:|
 | Info | [Description](data/variable_list_point_api.md#description), [Forecast_Calculated_LocalTime](data/variable_list_point_api.md#forecast_calculated_localtime), [Forecast_Calculated_UTC](data/variable_list_point_api.md#forecast_calculated_utc), [Latitude](data/variable_list_point_api.md#latitude), [Longitude](data/variable_list_point_api.md#longitude), [Altitude](data/variable_list_point_api.md#altitude) | - | -|
-| Forecast_daily | [ForecastDates_Utc](data/variable_list_lr_point_api.md#ForecastDates_Utc), [TemperatureMin](data/variable_list_lr_point_api.md#TemperatureMin), [TemperatureMean](data/variable_list_lr_point_api.md#TemperatureMean), [TemperatureMax](data/variable_list_lr_point_api.md#TemperatureMax), [PrecipitationTotal_dailySum](data/variable_list_lr_point_api.md#PrecipitationTotal_dailySum), [DownwardShortWaveRadiation](data/variable_list_lr_point_api.md#DownwardShortWaveRadiation) | 5 to 7 months | 1 day |
+| Forecast_daily | [ForecastDates_Utc](data/variable_list_lr_point_api.md#ForecastDates_Utc), [TemperatureMin](data/variable_list_lr_point_api.md#TemperatureMin), [TemperatureMean](data/variable_list_lr_point_api.md#TemperatureMean), [TemperatureMax](data/variable_list_lr_point_api.md#TemperatureMax), [PrecipitationTotal_dailySum](data/variable_list_lr_point_api.md#PrecipitationTotal_dailySum), [DownwardShortWaveRadiation](data/variable_list_lr_point_api.md#DownwardShortWaveRadiation) | 5 to 7 months | 1 month |
 
 What the response JSON looks like is shown in this [example file](data/fclrdaily.json). It consists of the objects `Info`, and `Forecast_daily`. 
 

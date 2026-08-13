@@ -1,0 +1,176 @@
+{
+    "Forecast_3hourly": {
+        "ForecastTimes_LocalTime": [
+            "2026-07-30T12:00-01:00",
+            "2026-07-30T15:00-01:00",
+            "2026-07-30T18:00-01:00",
+            "2026-07-30T21:00-01:00",
+            "2026-07-31T00:00-01:00",
+            "2026-07-31T03:00-01:00",
+            "2026-07-31T06:00-01:00",
+            "2026-07-31T09:00-01:00"
+        ],
+        "Icon": [
+            "sun_bright_cloud.png",
+            "sunny.png",
+            "sun_bright_cloud.png",
+            "sun_bright_cloud.png",
+            "sun_bright_cloud.png",
+            "sun_cloudy_bright.png",
+            "sun_bright_cloud.png",
+            "sun_bright_cloud.png"
+        ],
+        "PrecipitationTotal_3hourlySum": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "PrecipitationTotal_3hourlySum_unit": "mm",
+        "Temperature": [
+            17.5,
+            17.7,
+            17.8,
+            17.8,
+            17.7,
+            17.6,
+            17.6,
+            17.8
+        ],
+        "Temperature_unit": "°C",
+        "WeatherDescription": [
+            "sonnig",
+            "wolkenlos",
+            "sonnig",
+            "sonnig",
+            "sonnig",
+            "wolkig",
+            "sonnig",
+            "sonnig"
+        ],
+        "WindDirection": [
+            "NW",
+            "W",
+            "NW",
+            "NW",
+            "SW",
+            "W",
+            "NO",
+            "O"
+        ],
+        "WindDirection_usedValues": [
+            "N",
+            "NO",
+            "O",
+            "SO",
+            "S",
+            "SW",
+            "W",
+            "NW",
+            "XX"
+        ],
+        "WindSpeed": [
+            3.9,
+            4.8,
+            5.6,
+            2.2,
+            2.8,
+            2.9,
+            2.0,
+            8.4
+        ],
+        "WindSpeed_unit": "km/h"
+    },
+    "Forecast_daily": {
+        "ForecastTimes_LocalTime": [
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-01"
+        ],
+        "Icon": [
+            "sun_bright_cloud.png",
+            "sun_cloud_bright_rain_easy.png",
+            "cloud_bright_rain_hard.png"
+        ],
+        "MaximumTemperature": [
+            17.9,
+            18.9,
+            19.1
+        ],
+        "MaximumTemperature_unit": "°C",
+        "MaximumWindGust": [
+            13.5,
+            34.8,
+            68.4
+        ],
+        "MaximumWindGust_unit": "km/h",
+        "MaximumWindSpeed": [
+            14.3,
+            32.3,
+            58.0
+        ],
+        "MaximumWindSpeed_unit": "km/h",
+        "MaximumWindStrength": [
+            "niedrig",
+            "mäßig",
+            "hoch"
+        ],
+        "MaximumWindStrength_usedValues": [
+            "niedrig",
+            "mäßig",
+            "hoch",
+            "extrem"
+        ],
+        "MinimumTemperature": [
+            17.0,
+            17.6,
+            18.4
+        ],
+        "MinimumTemperature_unit": "°C",
+        "MinimumWindSpeed": [
+            2.2,
+            1.8,
+            29.5
+        ],
+        "MinimumWindSpeed_unit": "km/h",
+        "PrecipitationTotal_dailySum": [
+            0.0,
+            0.7,
+            34.7
+        ],
+        "PrecipitationTotal_dailySum_unit": "mm",
+        "WeatherDescription": [
+            "sonnig",
+            "wechselhaft, Schauer möglich",
+            "starker Regen"
+        ],
+        "WindDirectionAtMaxSpeed": [
+            "N",
+            "O",
+            "SO"
+        ],
+        "WindDirectionAtMaxSpeed_usedValues": [
+            "N",
+            "NO",
+            "O",
+            "SO",
+            "S",
+            "SW",
+            "W",
+            "NW",
+            "XX"
+        ]
+    },
+    "Info": {
+        "Altitude_[m]": 0.0,
+        "Description": "MetGIS Point API, Package \"starter\" v 2.0; all data correspond to local time",
+        "Forecast_Calculated_LocalTime": "2026-07-30T11:00-01:00",
+        "Forecast_Calculated_UTC": "2026-07-30T12:00+00:00",
+        "Latitude": 48.647861,
+        "Longitude": -16.019249
+    }
+}

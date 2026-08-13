@@ -1,0 +1,89 @@
+{
+    "Forecast": {
+        "Icon": "cloud_bright_rain_easy.png",
+        "MoonPhase": "drittes Viertel",
+        "MoonPhase_usedValues": [
+            "Neumond",
+            "erstes Viertel",
+            "zunehmender Halbmond",
+            "zweites Viertel",
+            "Vollmond",
+            "drittes Viertel",
+            "abnehmender Halbmond",
+            "letztes Viertel"
+        ],
+        "Moonrise": "2026-08-01T20:40-01:00",
+        "Moonrise_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Mondaufgang an diesem Tag",
+            "Kein Monduntergang an diesem Tag",
+            "Mond ganztags über dem Horizont",
+            "Mond ganztags unter dem Horizont",
+            ""
+        ],
+        "Moonset": "2026-08-01T07:49-01:00",
+        "Moonset_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Mondaufgang an diesem Tag",
+            "Kein Monduntergang an diesem Tag",
+            "Mond ganztags über dem Horizont",
+            "Mond ganztags unter dem Horizont",
+            ""
+        ],
+        "PrecipitationRain_Intensity": 1.0,
+        "PrecipitationRain_Intensity_unit": "mm/h",
+        "PrecipitationSnow_Intensity": 0.0,
+        "PrecipitationSnow_Intensity_unit": "cm/h",
+        "PrecipitationTotal_Intensity": 1.0,
+        "PrecipitationTotal_Intensity_unit": "mm/h",
+        "Sunrise": "2026-08-01T04:38-01:00",
+        "Sunrise_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Sonnenaufgang an diesem Tag",
+            "Kein Sonnenuntergang an diesem Tag",
+            "Sonne ganztags über dem Horizont",
+            "Sonne ganztags unter dem Horizont",
+            ""
+        ],
+        "Sunset": "2026-08-01T19:42-01:00",
+        "Sunset_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Sonnenaufgang an diesem Tag",
+            "Kein Sonnenuntergang an diesem Tag",
+            "Sonne ganztags über dem Horizont",
+            "Sonne ganztags unter dem Horizont",
+            ""
+        ],
+        "Temperature": 18.7,
+        "Temperature_unit": "°C",
+        "WindDirection": "SO",
+        "WindDirection_usedValues": [
+            "N",
+            "NO",
+            "O",
+            "SO",
+            "S",
+            "SW",
+            "W",
+            "NW",
+            "XX"
+        ],
+        "WindSpeed": 56.0,
+        "WindSpeed_unit": "km/h",
+        "WindStrength": "hoch",
+        "WindStrength_usedValues": [
+            "niedrig",
+            "mäßig",
+            "hoch",
+            "extrem"
+        ]
+    },
+    "Info": {
+        "Altitude_[m]": 0.0,
+        "Description": "MetGIS Point API, Package \"fctisl\" v 2.0; all data correspond to local time",
+        "Forecast_Calculated_LocalTime": "2026-08-01T11:34-01:00",
+        "Forecast_Calculated_UTC": "2026-08-01T12:34+00:00",
+        "Latitude": 48.647861,
+        "Longitude": -16.019249
+    }
+}

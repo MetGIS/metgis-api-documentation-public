@@ -543,3 +543,5 @@ map.on("pointermove", function(evt) {
 Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.org/en/v3.6.0/examples/tileutfgrid.html) for more information regarding the `ol.source.TileUTFGrid`.
 
 ## Common Errors
+Will be added shortly.
+

@@ -1,0 +1,90 @@
+{
+    "Current": {
+        "Icon": "sun_bright_cloud.png",
+        "MoonPhase": "drittes Viertel",
+        "MoonPhase_usedValues": [
+            "Neumond",
+            "erstes Viertel",
+            "zunehmender Halbmond",
+            "zweites Viertel",
+            "Vollmond",
+            "drittes Viertel",
+            "abnehmender Halbmond",
+            "letztes Viertel"
+        ],
+        "Moonrise": "2026-07-30T20:08-01:00",
+        "Moonrise_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Mondaufgang an diesem Tag",
+            "Kein Monduntergang an diesem Tag",
+            "Mond ganztags über dem Horizont",
+            "Mond ganztags unter dem Horizont",
+            ""
+        ],
+        "Moonset": "2026-07-30T05:23-01:00",
+        "Moonset_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Mondaufgang an diesem Tag",
+            "Kein Monduntergang an diesem Tag",
+            "Mond ganztags über dem Horizont",
+            "Mond ganztags unter dem Horizont",
+            ""
+        ],
+        "PrecipitationRain_Intensity": 0.0,
+        "PrecipitationRain_Intensity_unit": "mm/h",
+        "PrecipitationSnow_Intensity": 0.0,
+        "PrecipitationSnow_Intensity_unit": "cm/h",
+        "PrecipitationTotal_Intensity": 0.0,
+        "PrecipitationTotal_Intensity_unit": "mm/h",
+        "Sunrise": "2026-07-30T04:36-01:00",
+        "Sunrise_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Sonnenaufgang an diesem Tag",
+            "Kein Sonnenuntergang an diesem Tag",
+            "Sonne ganztags über dem Horizont",
+            "Sonne ganztags unter dem Horizont",
+            ""
+        ],
+        "Sunset": "2026-07-30T19:45-01:00",
+        "Sunset_usedValues": [
+            "%Y-%m-%dT%H:%M%:z",
+            "Kein Sonnenaufgang an diesem Tag",
+            "Kein Sonnenuntergang an diesem Tag",
+            "Sonne ganztags über dem Horizont",
+            "Sonne ganztags unter dem Horizont",
+            ""
+        ],
+        "Temperature": 17.3,
+        "Temperature_unit": "°C",
+        "WeatherDescription": "sonnig",
+        "WindDirection": "NW",
+        "WindDirection_usedValues": [
+            "N",
+            "NO",
+            "O",
+            "SO",
+            "S",
+            "SW",
+            "W",
+            "NW",
+            "XX"
+        ],
+        "WindSpeed": 5.1,
+        "WindSpeed_unit": "km/h",
+        "WindStrength": "niedrig",
+        "WindStrength_usedValues": [
+            "niedrig",
+            "mäßig",
+            "hoch",
+            "extrem"
+        ]
+    },
+    "Info": {
+        "Altitude_[m]": 0.0,
+        "Description": "MetGIS Point API, Package \"current\" v 2.0; all data correspond to local time",
+        "Forecast_Calculated_LocalTime": "2026-07-30T11:02-01:00",
+        "Forecast_Calculated_UTC": "2026-07-30T12:02+00:00",
+        "Latitude": 48.647861,
+        "Longitude": -16.019249
+    }
+}

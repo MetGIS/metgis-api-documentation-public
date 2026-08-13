@@ -1,14 +1,10 @@
 # Temperature Map (tmp2m)
 
-This map visualizes the temperature _(2 meters above ground)_ forecast. Show example of temperature map. An example of such a map is shown in figure below. 
-
 Multiple forecast time steps are available (e.g. forecast for 3 hours, 6 hours, 9 hours, ..) and there is one independent map per time step.
 
 The data is provided as raster tiles.
 
 Two maps are available. One covers the entire world and has a spatial resolution of ~1.5km. The other covers the Alps area and has a spatial resolution of ~100m.
-
-![Example Temperature Map](example_tmperature_map.png)
 
 ## Time Steps
 
