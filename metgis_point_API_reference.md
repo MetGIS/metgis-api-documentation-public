@@ -54,11 +54,12 @@ The packages differ in terms of:
 | [starter](#package-starter) | Forecast weather data for the location of interest. Forecasts in 3-hourly and daily resolution included | alt, lang |
 | [smart](#package-smart) | Current and forecast weather data  for the location of interest. Forecasts in 3-hourly and daily resolution included | alt, lang |
 | [premium](#package-premium) | Current and extended weather forecast data for the location of interest. Forecasts in hourly, 3-, 6-hourly and daily resolution | alt, lang |
-| [coldweather](#package-coldweather) | Current and extended weather forecast data for the location of interest. Forecasts in hourly, 3-, 6-hourly and daily resolution. This forecast incorporates special "winter" parameters like fresh snow density and the height of the 0°C isotherm | alt, lang | 
+| [coldweather](#package-coldweather) | Current and extended weather forecast data for the location of interest. Forecasts in hourly, 3-, 6-hourly and daily resolution. This forecast incorporates special cold weather parameters like fresh snow density and the height of the 0°C isotherm | alt, lang | 
 | [fctisl](#package-fctisl) | Weather forecast data for a specific time, very compact. | alt, lang |
 | [solar24](#package-solar24) | Radiation, temperature and precipitation forecast for the next 24 hours. | alt |
 | [solarD3](#package-solarD3) | Radiation and temperature forecast for the next 3 days. | alt |
 | [solarD9](#package-solarD9) | Radiation and temperature forecast for the next 9 days. | alt |
+| [agro](#package-agro) | Current and extended weather forecast data for the location of interest. This forecast incorporates special agricultural parameters like evapotranspiration, short wave radiation and long wave radiation. | alt, lang |
 
 Alongside most parameters, the JSON response includes one or two companion fields with the same name plus a suffix:
 
@@ -335,6 +336,31 @@ The response file consists of the objects `Info`, `Forecast_hourly` and `Forecas
 
 `Forecast_3hourly` covers the same parameters as `Forecast_hourly`, but extends the forecast range to 9 days at a 3-hourly resolution.
 
+### Package agro
+
+This package provides extended weather forecast data enriched with agricultural parameters, such as evapotranspiration and downward short- and long-wave radiation, tailored for agricultural use cases. It can be requested like this:
+```
+https://point-api.metgis.com/forecast?key={your-key}&lat={latitude}&lon={longitude}&v=agro
+```
+This table gives an overview of the information included in this package:
+
+| Item | Included Parameters | Forecast Range | Time Resolution |
+| --- | ------ | :-----: | :-----: |
+| Info | [Altitude_[m]](data_metgis_point_API_reference/variable_list.md#altitude_m), [Description](data_metgis_point_API_reference/variable_list.md#description), [Forecast_Calculated_LocalTime](data_metgis_point_API_reference/variable_list.md#forecast_calculated_localtime), [Forecast_Calculated_UTC](data_metgis_point_API_reference/variable_list.md#forecast_calculated_utc), [Latitude](data_metgis_point_API_reference/variable_list.md#latitude), [Longitude](data_metgis_point_API_reference/variable_list.md#longitude) | - | - |
+| Forecast_hourly | [ForecastTimes_LocalTime](data_metgis_point_API_reference/variable_list.md#forecasttimes_localtime), [PrecipitationRain_hourlySum](data_metgis_point_API_reference/variable_list.md#precipitationrain_hourlysum), [PrecipitationSnow_Sum](data_metgis_point_API_reference/variable_list.md#precipitationsnow_sum), [PrecipitationSnow_hourlySum](data_metgis_point_API_reference/variable_list.md#precipitationsnow_hourlysum), [PrecipitationTotal_hourlySum](data_metgis_point_API_reference/variable_list.md#precipitationtotal_hourlysum), [PrecipitationType](data_metgis_point_API_reference/variable_list.md#precipitationtype), [RelativeHumidity](data_metgis_point_API_reference/variable_list.md#relativehumidity), [Temperature](data_metgis_point_API_reference/variable_list.md#temperature), [WindDirection](data_metgis_point_API_reference/variable_list.md#winddirection), [WindSpeed](data_metgis_point_API_reference/variable_list.md#windspeed), [WindStrength](data_metgis_point_API_reference/variable_list.md#windstrength), [DownwardShortWaveRadiation](data_metgis_point_API_reference/variable_list.md#downwardshortwaveradiation), [DownwardLongWaveRadiation](data_metgis_point_API_reference/variable_list.md#downwardlongwaveradiation), [DewPointTemperature](data_metgis_point_API_reference/variable_list.md#dewpointtemperature), [VaporPressure](data_metgis_point_API_reference/variable_list.md#vaporpressure) | 4 days | 1 hour |
+| Forecast_daily | [ForecastTimes_LocalTime](data_metgis_point_API_reference/variable_list.md#forecasttimes_localtime), [MinimumWindSpeed](data_metgis_point_API_reference/variable_list.md#minimumwindspeed), [MaximumWindSpeed](data_metgis_point_API_reference/variable_list.md#maximumwindspeed), [WindDirectionAtMaxSpeed](data_metgis_point_API_reference/variable_list.md#winddirectionatmaxspeed), [MaximumWindStrength](data_metgis_point_API_reference/variable_list.md#maximumwindstrength), [MaximumWindGust](data_metgis_point_API_reference/variable_list.md#maximumwindgust), [MinimumRelativeHumidity](data_metgis_point_API_reference/variable_list.md#minimumrelativehumidity), [MeanRelativeHumidity](data_metgis_point_API_reference/variable_list.md#meanrelativehumidity), [MaximumRelativeHumidity](data_metgis_point_API_reference/variable_list.md#maximumrelativehumidity), [MinimumTemperature](data_metgis_point_API_reference/variable_list.md#minimumtemperature), [MaximumTemperature](data_metgis_point_API_reference/variable_list.md#maximumtemperature), [PrecipitationProbability](data_metgis_point_API_reference/variable_list.md#precipitationprobability), [PrecipitationRain_dailySum](data_metgis_point_API_reference/variable_list.md#precipitationrain_dailysum), [PrecipitationSnow_dailySum](data_metgis_point_API_reference/variable_list.md#precipitationsnow_dailysum), [PrecipitationTotal_dailySum](data_metgis_point_API_reference/variable_list.md#precipitationtotal_dailysum), [Evapotranspiration_dailySum](data_metgis_point_API_reference/variable_list.md#evapotranspiration_dailysum) | 14 days | 1 day |
+
+What the response JSON looks like is shown in this [example file](data_metgis_point_API_reference/agro.json).
+
+For the units and possible values of the forecast variables, see `<ParameterName>_unit` and `<ParameterName>_usedValues`.
+
+The response file consists of the objects `Info`, `Forecast_hourly` and `Forecast_daily`.
+
+`Info` contains a general description of the data, geographic information of the point of interest and the date and time when the forecast was calculated.
+
+`Forecast_hourly` contains arrays of weather forecast data for the next 4 days, in hourly resolution, including the agricultural parameters short-wave and long-wave radiation, dew point temperature and vapor pressure.
+
+The object `Forecast_daily` contains weather parameters describing the weather over periods of 24 hours for the next 14 days. Included are sums, minimum and maximum values of certain parameters, as well as the daily evapotranspiration sum.
 
 ## Common Errors
 

@@ -30,7 +30,19 @@ Dew point temperature at the point of interest for a given time, 2 meters above 
 
 ## DownwardShortWaveRadiation
 
-Downward short-wave radiation at the point of interest for a given time interval.
+Downward short-wave radiation flux at the point of interest for a given time interval.
+
+## DownwardLongWaveRadiation
+
+Downward long-wave radiation flux at the point of interest for a given time interval.
+
+## Evapotranspiration_dailySum
+
+Forecast daily evapotranspiration sum at the point of interest. The interval length of the summation is 24 hours and ends with the correspondent forecast time. Go [here](forecast3hourly_example_1.md) for an explicit example of forecast times and parameters for intervals.
+
+## VaporPressure
+
+Vapor pressure of water in the air at the point of interest for a given time, 2 meters above ground.
 
 ## FreshSnowDensity
 
