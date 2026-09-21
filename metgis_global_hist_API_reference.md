@@ -11,7 +11,7 @@ Data is available from 2005 through one week prior to the current date. It is up
 The API can be accessed via HTTP using a URL of the following form:
 
 ```
-https://api.hist-global.metgis.com/forecast?lon={longitude}&lat={latitude}&start_date={timestamp_startdate}&end_date={timestamp_enddate}&v={package-version}&key={your-key}
+https://api.hist-global.metgis.com/weather?lon={longitude}&lat={latitude}&start_date={timestamp_startdate}&end_date={timestamp_enddate}&v={package-version}&key={your-key}
 ```
 
 The parameters that have to be set are in curly brackets and listed in the following table:
@@ -67,7 +67,7 @@ The MetGIS Global HIST API provides access to the following weather parameters:
 A correct API request to retrieve the data package `hidsum` from the first to the third of April 2017 for specific coordinates would look like this:
 
 ```
-https://api.hist-global.metgis.com/forecast?lon=16.35639&lat=48.24861&start_date=20170401&end_date=20170403&v=hidsum&lang=en
+https://api.hist-global.metgis.com/weather?lon=16.35639&lat=48.24861&start_date=20170401&end_date=20170403&v=hidsum&lang=en
 &key={key}
 ```
 
@@ -198,7 +198,7 @@ And it would yield a JSON file like this:
 To retrieve hourly temperature data for the first of April 2017, the request would look like this:
 
 ```
-https://api.hist-global.metgis.com/forecast?lon=16.35639&lat=48.24861&start_date=20170401&end_date=20170401&v=hitemp&lang=en
+https://api.hist-global.metgis.com/weather?lon=16.35639&lat=48.24861&start_date=20170401&end_date=20170401&v=hitemp&lang=en
 &key={key}
 ```
 
