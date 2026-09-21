@@ -335,6 +335,10 @@ Maximum wind strength over the associated time span, represented using Beaufort 
 
 Maximum wind gust over the associated time span.
 
+## WindGust
+
+Wind gust speed 10 meters above ground.
+
 ## WindStrength
 
 Verbal description of occurring wind speed, based on the internationally renowned Beaufort scale. Values: `low`, `moderate`, `high` and `extreme`.
