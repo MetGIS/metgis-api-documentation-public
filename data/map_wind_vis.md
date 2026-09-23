@@ -48,11 +48,6 @@ So an R value of `0` corresponds to `umin`, and an R value of `255` corresponds 
 
 Wind Vector Map Alps
 
-```
-https://t1.metgis.com/wind_vector{t}/{z}/{x}/{y}.png?key=<my-key>
-https://t2.metgis.com/wind_vector{t}/{z}/{x}/{y}.png?key=<my-key>
-https://t3.metgis.com/wind_vector{t}/{z}/{x}/{y}.png?key=<my-key>
-
-```
+### Available upon Request
 
 (change `{t}` to a number of an available time step)
