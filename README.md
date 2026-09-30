@@ -36,4 +36,6 @@ Weather trends and probabilities for the next 7 months. See the [documentation](
 
 Easy access to all official weather warnings for Europe. See the [documentation](metgis_weather_warnings_API_reference.md). 
 
+## MetGIS Shading API
 
+Worldwide Terrain Shadows. Calculated minute by minute based on terrain and the sun’s position. See the [documentation](metgis_shading_API_reference.md). 
