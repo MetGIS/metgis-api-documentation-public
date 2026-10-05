@@ -28,7 +28,6 @@ Fortunately, in practice, we don't have to worry about loading the individual ti
 | [Combined Weather Map (Clouds/Rain/Snow)](data/map_weather.md) | World, Alps  | %, mm, cm | Vector      | 3 hrs           | 72 hrs         | 2             |
 | [Snow Cover](data/map_snow_alps.md)                            | Alps         | yes/no    | Vector      | -               | No forecast    | 1             |
 | [Wind Vector](data/map_wind_vis.md)                            | World, Alps  |           | Raster      | 3 hrs           | 72 hrs         | 2             |
-| [Wind Speed RGB](data/map_wind_vis.md)                         | World, Alps  | km/h      | Raster      | 3 hrs           | 72 hrs         | 2             |
 
 Click on your parameter of interest to get more detailed map information!
 
