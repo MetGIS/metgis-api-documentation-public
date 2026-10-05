@@ -547,125 +547,264 @@ map.on("pointermove", function(evt) {
 
 Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.org/en/v3.6.0/examples/tileutfgrid.html) for more information regarding the `ol.source.TileUTFGrid`.
 
-### MapLibre GL
+### MapLibre GL Example with UTF-Grid
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MetGIS Maps API temperature example</title>
+    <title>MetGIS Maps API temperature example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.12.0/dist/maplibre-gl.css" />
 
-  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" />
-  <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+        html, body, #map { height: 100%; }
 
-  <style>
-    html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; }
-    #map { position: absolute; inset: 0; }
+        .panel {
+            position: absolute; top: 12px; left: 12px; z-index: 1;
+            width: 260px; padding: 12px 14px;
+            background: #fff; border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
+            font-size: 13px; line-height: 1.4;
+        }
+        .panel label { display: block; margin-top: 10px; }
+        .panel input[type="range"] { width: 100%; }
+        .panel .row { display: flex; justify-content: space-between; }
+        .maplibregl-popup-content { white-space: pre-line; padding: 6px 10px; font-size: 13px; }
 
-    .panel {
-      position: absolute; top: 12px; left: 12px; z-index: 1;
-      width: 260px; padding: 12px 14px;
-      background: #fff; border-radius: 6px;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
-      font-size: 13px; line-height: 1.4;
-    }
-    .panel label { display: block; margin-top: 10px; }
-    .panel input[type="range"] { width: 100%; }
-    .panel .row { display: flex; justify-content: space-between; }
-  </style>
+        .legend {
+            position: absolute; left: 12px; bottom: 28px; z-index: 1;
+            max-height: calc(100% - 250px); overflow-y: auto; box-sizing: border-box;
+            padding: 10px 14px;
+            background: #fff; border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
+            font-size: 12px; line-height: 1;
+        }
+        .legend-title { font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+        .legend-row { display: flex; align-items: center; height: 14px; }
+        .legend-row i {
+            display: block; width: 28px; height: 14px; margin-right: 8px;
+            border: 1px solid rgba(0, 0, 0, .15); box-sizing: border-box;
+        }
+        .legend-row b {
+            font-weight: 400; font-variant-numeric: tabular-nums;
+        }
+    </style>
 </head>
 <body>
-  <div id="map"></div>
+<div id="map"></div>
 
-  <div class="panel">
+<div class="panel">
     <strong>MetGIS Maps API</strong><br />Temperature 2 m
     <label>
-      <input type="checkbox" id="toggle" checked /> Show overlay
+        <input type="checkbox" id="toggle" checked /> Show overlay
     </label>
     <label>
-      <span class="row"><span>Timestep</span><span id="stepLabel">1</span></span>
-      <input type="range" id="step" min="1" max="25" step="1" value="1" />
+        <span class="row"><span>Timestep</span><span id="stepLabel">1</span></span>
+        <input type="range" id="step" min="1" max="25" step="1" value="1" />
     </label>
     <label>
-      <span class="row"><span>Opacity</span><span id="opLabel">0.7</span></span>
-      <input type="range" id="opacity" min="0" max="1" step="0.05" value="0.7" />
+        <span class="row"><span>Opacity</span><span id="opLabel">0.7</span></span>
+        <input type="range" id="opacity" min="0" max="1" step="0.05" value="0.7" />
     </label>
-  </div>
+</div>
 
-  <script>
+<div class="legend" id="legend">
+    <div class="legend-title">Temperature 2 m<br />Value [°C]</div>
+    <div id="legendRows"></div>
+</div>
+
+<script type="module">
+    import * as maplibregl from 'https://unpkg.com/maplibre-gl@6.12.0/dist/maplibre-gl.mjs';
+
     // ---- Configuration -------------------------------------------------
-    const API_KEY   = "YOUR-API-KEY";
-    const SUBDOMAINS = ["t1", "t2", "t3"];          // {s} can be t1, t2, t3
-    const TMP2M_URL  = "https://{s}.metgis.com/tmp2m_";
-    const URL_SUFFIX = "/{z}/{x}/{y}.png?key=" + API_KEY;
-    let timestep = 1;                                // a value between 1 and 25
+    const API_KEY    = 'YOUR-API-KEY';
+    const SUBDOMAINS = ['t1', 't2', 't3'];             // {s} can be t1, t2, t3
+    const TMP2M_URL  = 'https://{s}.metgis.com/tmp2m_';
+    const URL_SUFFIX = '/{z}/{x}/{y}.png?key=' + API_KEY;
+    let timestep = 1;                                   // a value between 1 and 25
+    const GRID_URL_SUFFIX = '_grid/{z}/{x}/{y}.json?callback={cb}&key=' + API_KEY;
+    const GRID_MAX_ZOOM   = 12;                         // highest zoom the grid tiles exist for
 
     // MapLibre has no {s} subdomain substitution, so expand it into a tiles array.
     function buildTileUrls(step) {
-      return SUBDOMAINS.map(
-        (s) => TMP2M_URL.replace("{s}", s) + step + URL_SUFFIX
-      );
+        return SUBDOMAINS.map((s) => TMP2M_URL.replace('{s}', s) + step + URL_SUFFIX);
     }
 
     // ---- Map with a public basemap (OpenStreetMap raster tiles) --------
     const map = new maplibregl.Map({
-      container: "map",
-      center: [10, 50],
-      zoom: 4,
-      style: {
-        version: 8,
-        sources: {
-          osm: {
-            type: "raster",
-            tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-            tileSize: 256,
-            maxzoom: 19,
-            attribution: "&copy; OpenStreetMap contributors"
-          }
-        },
-        layers: [{ id: "osm", type: "raster", source: "osm" }]
-      }
+        container: 'map',
+        center: [10, 50],
+        zoom: 4,
+        maplibreLogo: true,
+        style: {
+            version: 8,
+            sources: {
+                osm: {
+                    type: 'raster',
+                    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+                    tileSize: 256,
+                    maxzoom: 19,
+                    attribution: '&copy; OpenStreetMap contributors'
+                }
+            },
+            layers: [{ id: 'osm', type: 'raster', source: 'osm' }]
+        }
     });
 
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.addControl(new maplibregl.NavigationControl(), 'top-right');
 
     // ---- Overlay layer -------------------------------------------------
-    map.on("load", () => {
-      map.addSource("tmp2m", {
-        type: "raster",
-        tiles: buildTileUrls(timestep),
-        tileSize: 256,
-        attribution: "Weather data &copy; MetGIS"
-      });
+    map.on('load', () => {
+        map.addSource('tmp2m', {
+            type: 'raster',
+            tiles: buildTileUrls(timestep),
+            tileSize: 256,
+            attribution: 'Weather data &copy; MetGIS'
+        });
 
-      map.addLayer({
-        id: "tmp2m",
-        type: "raster",
-        source: "tmp2m",
-        paint: { "raster-opacity": 0.7 }
-      });
+        map.addLayer({
+            id: 'tmp2m',
+            type: 'raster',
+            source: 'tmp2m',
+            paint: { 'raster-opacity': 0.7 }
+        });
     });
+
+    // ---- Legend --------------------------------------------------------
+    // [label, color]; the first and last entries are open-ended classes.
+    const LEGEND = [
+        ['<-30', '#737373'], ['-30', '#969696'], ['-28', '#bdbdbd'], ['-26', '#efedf5'],
+        ['-24', '#dadaeb'], ['-22', '#bcbddc'], ['-20', '#9e9ac8'], ['-18', '#807dba'],
+        ['-16', '#6a51a3'], ['-14', '#544082'], ['-12', '#06407c'], ['-10', '#08519c'],
+        ['-8', '#2171b5'], ['-6', '#4292c6'], ['-4', '#6baed6'], ['-2', '#9ecae1'],
+        ['0', '#238443'], ['2', '#41ab5d'], ['4', '#78c679'], ['6', '#addd8e'],
+        ['8', '#d9f0a3'], ['10', '#f7fcb9'], ['12', '#ffffcc'], ['14', '#ffeda0'],
+        ['16', '#fed976'], ['18', '#feb24c'], ['20', '#fd8d3c'], ['22', '#fdbb84'],
+        ['24', '#fc8d59'], ['26', '#ef6548'], ['28', '#d7301f'], ['30', '#bd0026'],
+        ['32', '#b30000'], ['34', '#800026'], ['36', '#7f0000'], ['38', '#4c0016'],
+        ['>40', '#35000f']
+    ];
+    const legendRows = document.getElementById('legendRows');
+
+    // Highest values first, so the legend reads like a temperature scale.
+    [...LEGEND].reverse().forEach(([label, color]) => {
+        const row = document.createElement('div');
+        row.className = 'legend-row';
+        row.innerHTML = '<i style="background:' + color + '"></i><b></b>';
+        row.querySelector('b').textContent = label;
+        legendRows.appendChild(row);
+    });
+
+    // ---- UTFGrid (custom, JSONP) ---------------------------------------
+    const gridCache = new Map();
+    let jsonpCounter = 0;
+
+    // The grid tiles are served as JSONP: callback({grid, keys, data})
+    function jsonp(url) {
+        return new Promise((resolve, reject) => {
+            const cb = '_utfgrid_cb_' + (++jsonpCounter);
+            const script = document.createElement('script');
+            const cleanup = () => { delete window[cb]; script.remove(); };
+            window[cb] = (data) => { cleanup(); resolve(data); };
+            script.onerror = () => { cleanup(); reject(new Error('Grid request failed')); };
+            script.src = url.replace('{cb}', cb);
+            document.head.appendChild(script);
+        });
+    }
+
+    function loadGridTile(z, x, y, step) {
+        const id = step + '/' + z + '/' + x + '/' + y;
+        if (!gridCache.has(id)) {
+            if (gridCache.size > 200) gridCache.delete(gridCache.keys().next().value);
+            const sub = SUBDOMAINS[(x + y) % SUBDOMAINS.length];
+            const url = (TMP2M_URL.replace('{s}', sub) + step + GRID_URL_SUFFIX)
+                .replace('{z}', z).replace('{x}', x).replace('{y}', y);
+            const promise = jsonp(url);
+            promise.catch(() => gridCache.delete(id));
+            gridCache.set(id, promise);
+        }
+        return gridCache.get(id);
+    }
+
+    // UTFGrid decoding: undo the offsets used to keep the characters printable
+    function gridCodeAt(grid, gx, gy) {
+        let code = grid[gy].charCodeAt(gx);
+        if (code >= 93) code--;
+        if (code >= 35) code--;
+        return code - 32;
+    }
+
+    async function lookupGrid(lngLat) {
+        const z = Math.max(0, Math.min(GRID_MAX_ZOOM, Math.floor(map.getZoom())));
+        const n = 2 ** z;
+        const lat = Math.max(-85.0511, Math.min(85.0511, lngLat.lat)) * Math.PI / 180;
+        const wx = ((lngLat.lng + 180) / 360) * n;
+        const wy = (1 - Math.asinh(Math.tan(lat)) / Math.PI) / 2 * n;
+        const tx = Math.floor(wx);
+        const ty = Math.floor(wy);
+        const x  = ((tx % n) + n) % n;                      // wrap across the date line
+
+        const tile = await loadGridTile(z, x, ty, timestep);
+        const rows = tile.grid.length;
+        const cols = tile.grid[0].length;
+        const gx = Math.min(cols - 1, Math.floor((wx - tx) * cols));
+        const gy = Math.min(rows - 1, Math.floor((wy - ty) * rows));
+
+        const key = tile.keys[gridCodeAt(tile.grid, gx, gy)];
+        return key ? (tile.data ? tile.data[key] : key) : null;
+    }
+
+    // Show only the temperature value in °C (first numeric field of the grid data).
+    function formatGridData(data) {
+        const values = (data !== null && typeof data === 'object') ? Object.values(data) : [data];
+        const value = values.map(Number).find((v) => Number.isFinite(v));
+        return value === undefined ? null : (Math.round(value * 10) / 10) + ' °C';
+    }
+
+    const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 12 });
+    let hoverId = 0;
+
+    map.on('mousemove', async (e) => {
+        if (!document.getElementById('toggle').checked) return;
+        const id = ++hoverId;
+        try {
+            const data = await lookupGrid(e.lngLat);
+            if (id !== hoverId) return;                     // a newer move superseded this one
+            if (data == null) { popup.remove(); return; }
+            const text = formatGridData(data);
+            if (text === null) { popup.remove(); return; }
+            popup.setLngLat(e.lngLat).setText(text).addTo(map);
+        } catch (err) {
+            if (id === hoverId) popup.remove();
+        }
+    });
+
+    map.on('mouseout', () => { hoverId++; popup.remove(); });
 
     // ---- Controls ------------------------------------------------------
-    document.getElementById("step").addEventListener("input", (e) => {
-      timestep = Number(e.target.value);
-      document.getElementById("stepLabel").textContent = timestep;
-      // Swap the tile URLs on the existing source (clears and reloads tiles)
-      map.getSource("tmp2m").setTiles(buildTileUrls(timestep));
+    document.getElementById('step').addEventListener('input', (e) => {
+        timestep = Number(e.target.value);
+        document.getElementById('stepLabel').textContent = timestep;
+        // Swap the tile URLs on the existing source (clears and reloads tiles)
+        map.getSource('tmp2m').setTiles(buildTileUrls(timestep));
+        hoverId++; popup.remove();
     });
 
-    document.getElementById("opacity").addEventListener("input", (e) => {
-      const value = Number(e.target.value);
-      document.getElementById("opLabel").textContent = value;
-      map.setPaintProperty("tmp2m", "raster-opacity", value);
+    document.getElementById('opacity').addEventListener('input', (e) => {
+        const value = Number(e.target.value);
+        document.getElementById('opLabel').textContent = value;
+        map.setPaintProperty('tmp2m', 'raster-opacity', value);
     });
 
-    document.getElementById("toggle").addEventListener("change", (e) => {
-      map.setLayoutProperty("tmp2m", "visibility", e.target.checked ? "visible" : "none");
+    document.getElementById('toggle').addEventListener('change', (e) => {
+        map.setLayoutProperty('tmp2m', 'visibility', e.target.checked ? 'visible' : 'none');
+        document.getElementById('legend').style.display = e.target.checked ? '' : 'none';
+        hoverId++; popup.remove();
     });
-  </script>
+</script>
 </body>
 </html>
 ```
