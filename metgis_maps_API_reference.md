@@ -388,6 +388,7 @@ Our weather maps may be integrated into your website or app, using different sof
 - [Leaflet](http://leafletjs.com/)
 - [OpenLayers](http://openlayers.org/)
 - [Google Maps API](https://developers.google.com/maps/)
+- [Maplibre GL](https://maplibre.org/)
 
 **Apps**
 
