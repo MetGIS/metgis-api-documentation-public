@@ -546,6 +546,125 @@ map.on("pointermove", function(evt) {
 
 Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.org/en/v3.6.0/examples/tileutfgrid.html) for more information regarding the `ol.source.TileUTFGrid`.
 
-## Common Errors
-Will be added shortly.
+### MapLibre GL
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MetGIS Maps API temperature example</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js"></script>
+
+  <style>
+    html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; }
+    #map { position: absolute; inset: 0; }
+
+    .panel {
+      position: absolute; top: 12px; left: 12px; z-index: 1;
+      width: 260px; padding: 12px 14px;
+      background: #fff; border-radius: 6px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .3);
+      font-size: 13px; line-height: 1.4;
+    }
+    .panel label { display: block; margin-top: 10px; }
+    .panel input[type="range"] { width: 100%; }
+    .panel .row { display: flex; justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <div class="panel">
+    <strong>MetGIS Maps API</strong><br />Temperature 2 m
+    <label>
+      <input type="checkbox" id="toggle" checked /> Show overlay
+    </label>
+    <label>
+      <span class="row"><span>Timestep</span><span id="stepLabel">1</span></span>
+      <input type="range" id="step" min="1" max="25" step="1" value="1" />
+    </label>
+    <label>
+      <span class="row"><span>Opacity</span><span id="opLabel">0.7</span></span>
+      <input type="range" id="opacity" min="0" max="1" step="0.05" value="0.7" />
+    </label>
+  </div>
+
+  <script>
+    // ---- Configuration -------------------------------------------------
+    const API_KEY   = "YOUR-API-KEY";
+    const SUBDOMAINS = ["t1", "t2", "t3"];          // {s} can be t1, t2, t3
+    const TMP2M_URL  = "https://{s}.metgis.com/tmp2m_";
+    const URL_SUFFIX = "/{z}/{x}/{y}.png?key=" + API_KEY;
+    let timestep = 1;                                // a value between 1 and 25
+
+    // MapLibre has no {s} subdomain substitution, so expand it into a tiles array.
+    function buildTileUrls(step) {
+      return SUBDOMAINS.map(
+        (s) => TMP2M_URL.replace("{s}", s) + step + URL_SUFFIX
+      );
+    }
+
+    // ---- Map with a public basemap (OpenStreetMap raster tiles) --------
+    const map = new maplibregl.Map({
+      container: "map",
+      center: [10, 50],
+      zoom: 4,
+      style: {
+        version: 8,
+        sources: {
+          osm: {
+            type: "raster",
+            tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+            tileSize: 256,
+            maxzoom: 19,
+            attribution: "&copy; OpenStreetMap contributors"
+          }
+        },
+        layers: [{ id: "osm", type: "raster", source: "osm" }]
+      }
+    });
+
+    map.addControl(new maplibregl.NavigationControl(), "top-right");
+
+    // ---- Overlay layer -------------------------------------------------
+    map.on("load", () => {
+      map.addSource("tmp2m", {
+        type: "raster",
+        tiles: buildTileUrls(timestep),
+        tileSize: 256,
+        attribution: "Weather data &copy; MetGIS"
+      });
+
+      map.addLayer({
+        id: "tmp2m",
+        type: "raster",
+        source: "tmp2m",
+        paint: { "raster-opacity": 0.7 }
+      });
+    });
+
+    // ---- Controls ------------------------------------------------------
+    document.getElementById("step").addEventListener("input", (e) => {
+      timestep = Number(e.target.value);
+      document.getElementById("stepLabel").textContent = timestep;
+      // Swap the tile URLs on the existing source (clears and reloads tiles)
+      map.getSource("tmp2m").setTiles(buildTileUrls(timestep));
+    });
+
+    document.getElementById("opacity").addEventListener("input", (e) => {
+      const value = Number(e.target.value);
+      document.getElementById("opLabel").textContent = value;
+      map.setPaintProperty("tmp2m", "raster-opacity", value);
+    });
+
+    document.getElementById("toggle").addEventListener("change", (e) => {
+      map.setLayoutProperty("tmp2m", "visibility", e.target.checked ? "visible" : "none");
+    });
+  </script>
+</body>
+</html>
+```
