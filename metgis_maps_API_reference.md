@@ -673,7 +673,7 @@ Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.
     });
 
     // ---- Legend --------------------------------------------------------
-    // [label, color]; the first and last entries are open-ended classes.
+    // [label, color]; 
     const LEGEND = [
         ['<-30', '#737373'], ['-30', '#969696'], ['-28', '#bdbdbd'], ['-26', '#efedf5'],
         ['-24', '#dadaeb'], ['-22', '#bcbddc'], ['-20', '#9e9ac8'], ['-18', '#807dba'],
@@ -728,7 +728,7 @@ Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.
         return gridCache.get(id);
     }
 
-    // UTFGrid decoding: undo the offsets used to keep the characters printable
+    // UTFGrid decoding
     function gridCodeAt(grid, gx, gy) {
         let code = grid[gy].charCodeAt(gx);
         if (code >= 93) code--;
@@ -756,7 +756,7 @@ Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.
         return key ? (tile.data ? tile.data[key] : key) : null;
     }
 
-    // Show only the temperature value in °C (first numeric field of the grid data).
+  
     function formatGridData(data) {
         const values = (data !== null && typeof data === 'object') ? Object.values(data) : [data];
         const value = values.map(Number).find((v) => Number.isFinite(v));
@@ -771,7 +771,7 @@ Please refer to the official OpenLayers [TileUTFGrid Example](http://openlayers.
         const id = ++hoverId;
         try {
             const data = await lookupGrid(e.lngLat);
-            if (id !== hoverId) return;                     // a newer move superseded this one
+            if (id !== hoverId) return;                     
             if (data == null) { popup.remove(); return; }
             const text = formatGridData(data);
             if (text === null) { popup.remove(); return; }
